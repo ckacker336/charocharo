@@ -1,0 +1,123 @@
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+
+<body>
+  <script type="text/javascript">
+    var mode = 0;
+
+    function calc(buyVal, shipVal, discount, shipping, charge) {
+      //console.log(mode);
+      var buyInt = Number(buyVal);
+      var shipPayInt = Number(shipVal);
+      var discountInt = Number(discount);
+      var shipInt = Number(shipping);
+      var chargeInt = Number(charge);
+      var value =
+        (10 / chargeInt) *
+        (buyInt + shipInt + shipPayInt - (buyInt * discountInt) / 100);
+      return Math.round(value);
+    }
+
+    function hyoji(num) {
+      document.getElementById("merShip").style.display =
+        num == 0 ? "block" : "none";
+      document.getElementById("payShip").style.display =
+        num == 1 ? "block" : "none";
+      document.getElementById("rakShip").style.display =
+        num == 2 ? "block" : "none";
+      mode = num
+    }
+
+    function getShipValue(num) {
+      if (num == 0) return document.getElementById("merShip").value;
+      else if (num == 1) return document.getElementById("payShip").value;
+      else if (num == 2) return document.getElementById("rakShip").value
+    }
+  </script>
+  <style type="text/css">
+    .inpt {
+      height: 50px;
+      font-size: 20;
+      marge: 1px;
+    }
+
+    .radio {
+      font-size: 1.1em;
+    }
+  </style>
+  <div class="contact-form">
+    <form onsubmit="return false" id="example" oninput="
+result.value = calc(a.value, a2.value, b.value, getShipValue(mode), portion.value); 
+discnt.value=Number(a.value) * Number(b.value) / 100;
+resultShip.value = getShipValue(mode);
+">
+      <table>
+        <tr>
+          <th>購入</th>
+          <td><input class="inpt" name="a" type="number" />円</td>
+        </tr>
+        <tr>
+          <th>送料</th>
+          <td><input class="inpt" name="a2" type="number" />円</td>
+        </tr>
+        <tr>
+          <th>割引</th>
+          <td>
+            <input class="inpt" name="b" type="number" value="0" min="0" max="100" />%
+          </td>
+        </tr>
+        　<tr>
+          <th>種類</th>
+          <td>
+            <label><input class="radio" type="radio" onclick="hyoji(0);" name="portion" value="9" checked />メルカリ</label>
+            <label><input type="radio" onclick="hyoji(1);" name="portion" value="9.5" />Payフリ</label>
+            <label><input type="radio" onclick="hyoji(2);" name="portion" value="9.4" />ラクマ</label>
+          </td>
+        </tr>
+        <tr>
+          <th>配送</th>
+          <td>
+            <select class="inpt" name="ship0" id="merShip">
+              <option value="175">ヤ)ネコポス</option>
+              <option value="380">ヤ)コンパクト</option>
+              <option value="200">ゆ)ゆうパケット</option>
+              <option value="200">ゆ)ゆうパケットポスト</option>
+              <option value="375">ゆ)ゆうパケットプラス</option>
+              <option value="700">ゆ)ゆうパック60</option>
+              <option value="800">ゆ)ゆうパック80</option>
+              <option value="1000">ゆ)ゆうパック100</option>
+            </select>
+            <select class="inpt" name="ship1" id="payShip" style="display: none">
+              <option value="175">ヤ)ネコポス</option>
+              <option value="380">ヤ)コンパクト</option>
+              <option value="200">ゆ)ゆうパケット</option>
+              <option value="175">ゆ)ゆうパケットポスト</option>
+              <option value="375">ゆ)ゆうパケットプラス</option>
+              <option value="700">ゆ)ゆうパック60</option>
+              <option value="800">ゆ)ゆうパック80</option>
+              <option value="1000">ゆ)ゆうパック100</option>
+            </select>
+            <select class="inpt" name="ship2" id="rakShip" style="display: none">
+              <option value="175">ヤ)ネコポス</option>
+              <option value="380">ヤ)コンパクト</option>
+              <option value="200">ゆ)ゆうパケット</option>
+              <option value="175">ゆ)ゆうパケットポスト</option>
+              <option value="375">ゆ)ゆうパケットプラス</option>
+              <option value="700">ゆ)ゆうパック60</option>
+              <option value="800">ゆ)ゆうパック80</option>
+              <option value="1000">ゆ)ゆうパック100</option>
+            </select>
+          </td>
+        </tr>
+
+      </table>
+    </form>
+
+    <p>最低金額 ：<output name="result" form="example">0</output></p>
+    <p>値引額　 ：<output name="discnt" form="example">0</output></p>
+    <p>送料　　 ：<output name="resultShip" form="example">0</output></p>
+  </div>
+</body>
+
+</html>
