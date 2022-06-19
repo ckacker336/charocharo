@@ -51,6 +51,7 @@
 result.value = calc(a.value, a2.value, b.value, getShipValue(mode), portion.value); 
 discnt.value=Number(a.value) * Number(b.value) / 100;
 resultShip.value = getShipValue(mode);
+resultSum.value = a.value - discnt.value;
 ">
       <table>
         <tr>
@@ -116,6 +117,8 @@ resultShip.value = getShipValue(mode);
 
     <p>最低金額 ：<output name="result" form="example">0</output></p>
     <p>値引額　 ：<output name="discnt" form="example">0</output></p>
+    
+    <p>値引後：<output name="resultSum" form="example">0</output></p>
     <p>送料　　 ：<output name="resultShip" form="example">0</output></p>
   </div>
 </body>
